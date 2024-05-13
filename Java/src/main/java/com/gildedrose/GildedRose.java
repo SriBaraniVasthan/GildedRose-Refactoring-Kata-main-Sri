@@ -4,6 +4,7 @@ class GildedRose {
     private static final String AGED_BRIE = "Aged Brie";
 	private static final String SULFURAS_HAND_OF_RAGNAROS = "Sulfuras, Hand of Ragnaros";
 	private static final String BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
+	public static final String CONJURED = "Conjured Mana Cake";
 	private Item[] items;
 
 	public GildedRose(Item... items) {
@@ -20,9 +21,10 @@ class GildedRose {
     }
 
 	private void updateQualityOfItem(Item item) {
-		if (!item.name.equals(AGED_BRIE) && !item.name.equals(BACKSTAGE_PASSES)
-				&& !item.name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
-			calculateQuality(item, -1);
+		int degradeRate = item.name.equals(CONJURED) ? -2 : -1;
+		boolean whenItemDegrades = !item.name.equals(AGED_BRIE) && !item.name.equals(BACKSTAGE_PASSES) && !item.name.equals(SULFURAS_HAND_OF_RAGNAROS);
+		if (whenItemDegrades) {
+			calculateQuality(item, degradeRate);
 		}
 		if (item.name.equals(AGED_BRIE)) {
 			calculateQuality(item, 1);
@@ -44,9 +46,8 @@ class GildedRose {
 		}
 
 		if (item.sellIn < 0) {
-			if (!item.name.equals(AGED_BRIE) && !item.name.equals(BACKSTAGE_PASSES)
-					&& !item.name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
-				calculateQuality(item, -1);
+			if (whenItemDegrades) {
+				calculateQuality(item, degradeRate);
 			}
 			if (item.name.equals(AGED_BRIE)) {
 				calculateQuality(item, 1);
