@@ -76,6 +76,13 @@ class GildedRoseTest {
 		assertItemEquals(app.getItems()[0], new Item("Backstage passes to a TAFKAL80ETC concert", -1, 0));
 	}
 	
+	@Test
+	public void item_Sulfuras_neverChanges() {
+		GildedRose app = new GildedRose(new Item("Sulfuras, Hand of Ragnaros", 100, 100));
+		app.updateQuality();
+		assertItemEquals(app.getItems()[0], new Item("Sulfuras, Hand of Ragnaros", 100, 100));
+	}
+	
 	public static void assertItemEquals(Item actual, Item expected) {
 		assertEquals(expected.name, actual.name);
 		assertEquals(expected.quality, actual.quality);
