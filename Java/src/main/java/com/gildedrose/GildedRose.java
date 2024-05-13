@@ -3,7 +3,7 @@ package com.gildedrose;
 class GildedRose {
     private static final String AGED_BRIE = "Aged Brie";
 	private static final String SULFURAS_HAND_OF_RAGNAROS = "Sulfuras, Hand of Ragnaros";
-	private static final String BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT = "Backstage passes to a TAFKAL80ETC concert";
+	private static final String BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
 	Item[] items;
 
     public GildedRose(Item[] items) {
@@ -17,22 +17,22 @@ class GildedRose {
     }
 
 	private void updateQualityOfItem(Item item) {
-		if (!item.name.equals(AGED_BRIE) && !item.name.equals(BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT)) {
-
-			if (!item.name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
-				item.quality = item.quality - 1;
-			}
-		} else {
+		if (!item.name.equals(AGED_BRIE) && !item.name.equals(BACKSTAGE_PASSES)
+				&& !item.name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
+			item.quality = item.quality - 1;
+		}
+		if (item.name.equals(AGED_BRIE)) {
 			calculateQuality(item, 1);
+		}
 
-			if (item.name.equals(BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT)) {
-				if (item.sellIn < 11) {
-					calculateQuality(item, 1);
-				}
+		if (item.name.equals(BACKSTAGE_PASSES)) {
+			calculateQuality(item, 1);
+			if (item.sellIn < 11) {
+				calculateQuality(item, 1);
+			}
 
-				if (item.sellIn < 6) {
-					calculateQuality(item, 1);
-				}
+			if (item.sellIn < 6) {
+				calculateQuality(item, 1);
 			}
 		}
 
@@ -41,16 +41,14 @@ class GildedRose {
 		}
 
 		if (item.sellIn < 0) {
-			if (!item.name.equals(AGED_BRIE)) {
-				if (!item.name.equals(BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT)) {
-					if (!item.name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
-						item.quality = item.quality - 1;
-					}
-				} else {
-					item.quality = item.quality - item.quality;
-				}
-			} else {
+			if (!item.name.equals(AGED_BRIE) && !item.name.equals(BACKSTAGE_PASSES)
+					&& !item.name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
+				calculateQuality(item, -1);
+			}
+			if (item.name.equals(AGED_BRIE)) {
 				calculateQuality(item, 1);
+			} else if (item.name.equals(BACKSTAGE_PASSES)) {
+				item.quality = item.quality - item.quality;
 			}
 		}
 	}
