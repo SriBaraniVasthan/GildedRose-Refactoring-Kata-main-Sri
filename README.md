@@ -1,3 +1,5 @@
+Problem Statement: https://github.com/SriBaraniVasthan/GildedRose-Refactoring-Kata-main-Sri/blob/main/GildedRoseRequirementsSpecification.pdf
+
 The Java version of Gilded-Rose-refactoring-kata is cloned from original source repository("https://github.com/emilybache/GildedRose-Refactoring-Kata.git") and refactoring has been performed to achieve the below requirements. 
 
 Firstly, Test cases have been written for all existing current functionality setup and additional a failing test case for the new "Conjured" item as part of the challenge. All current functionality code are verified with successful test runs.
